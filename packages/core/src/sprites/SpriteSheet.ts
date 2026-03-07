@@ -30,7 +30,8 @@ export class SpriteSheet {
           resolve();
         };
         img.onerror = () => reject(new Error(`Failed to load sprite sheet: ${filename}`));
-        img.src = `${basePath}/${filename}`;
+        const isAbsolute = /^(blob:|data:|https?:\/\/)/.test(filename);
+        img.src = isAbsolute ? filename : `${basePath}/${filename}`;
       });
     });
 

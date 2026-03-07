@@ -42,7 +42,8 @@ export class Scene implements RenderLayer {
         const img = new Image();
         img.onload = () => resolve(img);
         img.onerror = () => reject(new Error(`Failed to load tileset: ${ts.image}`));
-        img.src = `${basePath}/${ts.image}`;
+        const isAbsolute = /^(blob:|data:|https?:\/\/)/.test(ts.image);
+        img.src = isAbsolute ? ts.image : `${basePath}/${ts.image}`;
       });
     });
 

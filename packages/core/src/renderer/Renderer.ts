@@ -18,8 +18,8 @@ export class Renderer {
   constructor(container: HTMLElement, width: number, height: number, scale: number) {
     this.scale = scale;
     this.canvas = document.createElement('canvas');
-    this.canvas.width = width * scale;
-    this.canvas.height = height * scale;
+    this.canvas.width = width;
+    this.canvas.height = height;
     this.canvas.style.imageRendering = 'pixelated';
     this.canvas.style.width = `${width * scale}px`;
     this.canvas.style.height = `${height * scale}px`;
@@ -65,7 +65,6 @@ export class Renderer {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.setTransform(this.scale, 0, 0, this.scale, 0, 0);
     this.camera.update();
     this.camera.apply(ctx);
 

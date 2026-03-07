@@ -1,0 +1,25 @@
+{
+  "name": "@miniverse/server",
+  "version": "0.1.0",
+  "description": "Local server for Miniverse — ingest API, WebSocket, and web frontend",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "miniverse": "./bin/miniverse.js"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node --watch src/cli.ts --experimental-strip-types || npx tsx src/cli.ts",
+    "start": "node dist/cli.js"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "esbuild": "^0.20.0",
+    "@types/ws": "^8.5.10"
+  },
+  "license": "MIT"
+}

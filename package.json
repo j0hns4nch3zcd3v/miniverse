@@ -7,7 +7,9 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace=demo",
-    "build": "npm run build --workspace=packages/core",
+    "start": "node packages/server/dist/cli.js",
+    "build": "npm run build --workspace=packages/core && node packages/server/build.js",
+    "build:server": "node packages/server/build.js",
     "build:all": "npm run build --workspaces",
     "lint": "eslint packages/*/src/**/*.ts",
     "typecheck": "tsc --noEmit --project packages/core/tsconfig.json"

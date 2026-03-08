@@ -1,0 +1,526 @@
+{
+  "name": "cozy_startup_office",
+  "gridCols": 18,
+  "gridRows": 14,
+  "textures": [
+    {
+      "id": "reclaimed_wood_floor",
+      "prompt": "worn, rustic reclaimed wood planks, top-down pixel art, warm browns and grays",
+      "role": "floor"
+    },
+    {
+      "id": "exposed_brick_wall",
+      "prompt": "exposed red brick wall, slightly weathered mortar, top-down pixel art, dark reds and oranges",
+      "role": "wall"
+    },
+    {
+      "id": "concrete_accent_floor",
+      "prompt": "smooth, light grey polished concrete floor, subtle reflections, top-down pixel art",
+      "role": "accent_floor"
+    },
+    {
+      "id": "dark_tile_accent_floor",
+      "prompt": "dark, geometric pattern floor tiles, small squares in black and deep blue, pixel art",
+      "role": "accent_floor"
+    }
+  ],
+  "furniture": [
+    {
+      "id": "desk_wood_modern",
+      "prompt": "modern wooden desk, light wood finish, minimalist design, pixel art",
+      "count": 4,
+      "w": 3,
+      "h": 2,
+      "layer": "below",
+      "anchorType": "work"
+    },
+    {
+      "id": "office_chair_swivel",
+      "prompt": "comfortable ergonomic office chair, black fabric, swivel base, pixel art",
+      "count": 4,
+      "w": 1.5,
+      "h": 1.5,
+      "layer": "above"
+    },
+    {
+      "id": "potted_plant_tall",
+      "prompt": "tall potted plant, dark green leaves, terracotta pot, pixel art",
+      "count": 3,
+      "w": 1,
+      "h": 1,
+      "layer": "below"
+    },
+    {
+      "id": "potted_plant_small",
+      "prompt": "small potted plant, green succulent, ceramic pot, pixel art",
+      "count": 2,
+      "w": 0.8,
+      "h": 0.8,
+      "layer": "below"
+    },
+    {
+      "id": "coffee_machine",
+      "prompt": "sleek modern coffee machine, chrome and black, small drip tray, pixel art",
+      "count": 1,
+      "w": 1,
+      "h": 1,
+      "layer": "below",
+      "anchorType": "utility"
+    },
+    {
+      "id": "coffee_counter",
+      "prompt": "wooden counter, dark stained wood, simple design, pixel art",
+      "count": 2,
+      "w": 2,
+      "h": 1,
+      "layer": "below"
+    },
+    {
+      "id": "beanbag_orange",
+      "prompt": "bright orange bean bag chair, slightly deflated, comfortable looking, pixel art",
+      "count": 2,
+      "w": 2,
+      "h": 2,
+      "layer": "below",
+      "anchorType": "rest"
+    },
+    {
+      "id": "low_table_wood",
+      "prompt": "small, wooden coffee table, dark wood, rectangular, pixel art",
+      "count": 1,
+      "w": 2,
+      "h": 1.5,
+      "layer": "below"
+    },
+    {
+      "id": "bookshelf_full",
+      "prompt": "wooden bookshelf, full of colorful books, decorative items, pixel art",
+      "count": 1,
+      "w": 1,
+      "h": 2,
+      "layer": "below"
+    },
+    {
+      "id": "fridge_mini",
+      "prompt": "mini-fridge, black finish, small door, pixel art",
+      "count": 1,
+      "w": 1,
+      "h": 1,
+      "layer": "below",
+      "anchorType": "utility"
+    }
+  ],
+  "layout": {
+    "floor": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "placements": [
+      {
+        "furnitureIndex": 0,
+        "x": 2,
+        "y": 2
+      },
+      {
+        "furnitureIndex": 1,
+        "x": 3,
+        "y": 3.5
+      },
+      {
+        "furnitureIndex": 0,
+        "x": 6,
+        "y": 2
+      },
+      {
+        "furnitureIndex": 1,
+        "x": 7,
+        "y": 3.5
+      },
+      {
+        "furnitureIndex": 0,
+        "x": 2,
+        "y": 6
+      },
+      {
+        "furnitureIndex": 1,
+        "x": 3,
+        "y": 7.5
+      },
+      {
+        "furnitureIndex": 0,
+        "x": 6,
+        "y": 6
+      },
+      {
+        "furnitureIndex": 1,
+        "x": 7,
+        "y": 7.5
+      },
+      {
+        "furnitureIndex": 2,
+        "x": 1,
+        "y": 4
+      },
+      {
+        "furnitureIndex": 2,
+        "x": 5,
+        "y": 9.5
+      },
+      {
+        "furnitureIndex": 2,
+        "x": 9,
+        "y": 1
+      },
+      {
+        "furnitureIndex": 3,
+        "x": 9.5,
+        "y": 3.7
+      },
+      {
+        "furnitureIndex": 3,
+        "x": 13.5,
+        "y": 7.7
+      },
+      {
+        "furnitureIndex": 5,
+        "x": 12,
+        "y": 2
+      },
+      {
+        "furnitureIndex": 5,
+        "x": 14,
+        "y": 2
+      },
+      {
+        "furnitureIndex": 4,
+        "x": 13,
+        "y": 2.5
+      },
+      {
+        "furnitureIndex": 9,
+        "x": 15,
+        "y": 2.5
+      },
+      {
+        "furnitureIndex": 6,
+        "x": 13.5,
+        "y": 10
+      },
+      {
+        "furnitureIndex": 6,
+        "x": 15.5,
+        "y": 9.5
+      },
+      {
+        "furnitureIndex": 7,
+        "x": 14,
+        "y": 8
+      },
+      {
+        "furnitureIndex": 8,
+        "x": 11,
+        "y": 10
+      }
+    ],
+    "wanderPoints": [
+      {
+        "name": "wander_center_lounge",
+        "x": 14,
+        "y": 6
+      },
+      {
+        "name": "wander_coffeebar",
+        "x": 13,
+        "y": 4
+      },
+      {
+        "name": "wander_desk_area",
+        "x": 5,
+        "y": 4
+      },
+      {
+        "name": "wander_corridor",
+        "x": 9.5,
+        "y": 6
+      }
+    ]
+  }
+}

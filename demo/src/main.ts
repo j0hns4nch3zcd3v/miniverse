@@ -73,7 +73,7 @@ function buildSceneConfig(cols = 16, rows = 12, savedFloor?: number[][]): SceneC
       lounge: { x: 5, y: 8, label: 'Lounge' },
     },
     tilesets: [{
-      image: '/tilesets/office.png',
+      image: '/tilesets/tileset.png',
       tileWidth: 32,
       tileHeight: 32,
       columns: 16,
@@ -180,17 +180,21 @@ async function main() {
   // --- Furniture system (load before start so anchors exist for initial placement) ---
   const furniture = new FurnitureSystem(32, 2);
 
-  await Promise.all([
-    furniture.loadSprite('desk', '/sprites/piece_0.png'),
-    furniture.loadSprite('chair', '/sprites/chair_back.png'),
-    furniture.loadSprite('couch', '/sprites/piece_2.png'),
-    furniture.loadSprite('coffee_machine', '/sprites/piece_3.png'),
-    furniture.loadSprite('bookshelf', '/sprites/piece_4.png'),
-    furniture.loadSprite('water_cooler', '/sprites/piece_5.png'),
-    furniture.loadSprite('plant', '/sprites/piece_6.png'),
-    furniture.loadSprite('whiteboard', '/sprites/piece_8.png'),
-    furniture.loadSprite('lamp', '/sprites/piece_9.png'),
-  ]);
+  // Load furniture sprites from scene data (dynamic) or fallback to defaults
+  const spriteMap: Record<string, string> = sceneData?.spriteMap ?? {
+    desk: '/sprites/piece_0.png',
+    chair: '/sprites/chair_back.png',
+    couch: '/sprites/piece_2.png',
+    coffee_machine: '/sprites/piece_3.png',
+    bookshelf: '/sprites/piece_4.png',
+    water_cooler: '/sprites/piece_5.png',
+    plant: '/sprites/piece_6.png',
+    whiteboard: '/sprites/piece_8.png',
+    lamp: '/sprites/piece_9.png',
+  };
+  await Promise.all(
+    Object.entries(spriteMap).map(([id, src]) => furniture.loadSprite(id, src)),
+  );
 
   furniture.setLayout(sceneData?.furniture ?? []);
   if (sceneData?.wanderPoints) {
@@ -219,6 +223,7 @@ async function main() {
 
   // --- Editor (tabbed: furniture | characters | behavior) ---
   const editor = new Editor(mv.getCanvas(), furniture, mv);
+  if (sceneData?.tileNames) editor.setTileNames(sceneData.tileNames);
   editor.loadCharacterAssignments(sceneData?.characters);
   mv.addLayer({ order: 50, render: (ctx) => {
     editor.renderOverlay(ctx);

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { generateCharacter, generateFurniture, generateObject, generateTexture, buildTileset, processExistingImage } from './pipeline.js';
+import { generateWorld } from './world.js';
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -36,6 +37,8 @@ Usage:
   miniverse-generate object --prompt "description" --output path
   miniverse-generate furniture --prompt "description" [options]
   miniverse-generate texture --prompt "description" --output path
+  miniverse-generate world --prompt "description" --output ./my-world/
+  miniverse-generate world --image reference.jpg --output ./my-world/
   miniverse-generate tileset --tiles tile1.png tile2.png ... --output tileset.png
   miniverse-generate process --input file.png --type character|furniture --output path
 
@@ -44,6 +47,7 @@ Commands:
   object      Generate a single object/furniture piece
   furniture   Generate furniture pieces (multi-item set)
   texture     Generate a seamless tileable texture (floor, wall, etc.)
+  world       Generate an entire workspace (textures, furniture, layout)
   tileset     Assemble individual tile PNGs into a tileset atlas
   process     Process an existing raw image (skip generation)
 
@@ -55,6 +59,8 @@ Options:
   --size        Tile size for textures/tileset (default: 32)
   --columns     Tileset columns per row (default: 16)
   --tiles       Tile PNG paths for tileset command (all remaining args)
+  --residents   Number of work desks/residents for world command (default: 4)
+  --model       LLM model for world planning (default: google/gemini-2.5-flash)
   --input       Input image path (for process command)
   --skip-bg     Skip background removal
   --help        Show this help
@@ -84,6 +90,14 @@ Examples:
     --prompt "stone brick wall" \\
     --output tilesets/wall.png
 
+  miniverse-generate world \\
+    --prompt "cozy startup office with lots of plants" \\
+    --output ./my-world/
+
+  miniverse-generate world \\
+    --image office-photo.jpg \\
+    --output ./my-world/ --residents 6
+
   miniverse-generate tileset \\
     --tiles floor.png wall.png door.png \\
     --output tilesets/office.png
@@ -110,6 +124,35 @@ async function main() {
       process.exit(1);
     }
     await processExistingImage(input, type, output, { skipBgRemoval: hasFlag('skip-bg') });
+    return;
+  }
+
+  if (command === 'world') {
+    const prompt = getFlag('prompt') ?? '';
+    const image = getFlag('image');
+    const output = getFlag('output') ?? './world-output/';
+    const residents = getFlag('residents') ? parseInt(getFlag('residents')!, 10) : 4;
+    const model = getFlag('model');
+    if (!prompt && !image) {
+      console.error('Error: --prompt or --image is required for world command');
+      process.exit(1);
+    }
+    if (!process.env.FAL_KEY) {
+      console.error('Error: FAL_KEY environment variable is required');
+      process.exit(1);
+    }
+    const result = await generateWorld({
+      prompt: prompt || 'modern office workspace',
+      refImage: image,
+      output,
+      residents,
+      model: model,
+    });
+    console.log(`\nWorld generated in: ${output}`);
+    console.log(`  Scene:   ${result.scenePath}`);
+    console.log(`  Tileset: ${result.tilesetPath}`);
+    console.log(`  Sprites: ${result.furniturePaths.length} furniture pieces`);
+    console.log('Done!');
     return;
   }
 

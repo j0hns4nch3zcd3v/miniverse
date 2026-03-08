@@ -14,3 +14,5 @@ export type {
 export { buildPrompt, type SheetType } from './prompt.js';
 export { processCharacterSheet, processFurnitureSheet, processTexture, assembleTileset } from './process.js';
 export { removeBg, removeBgUrl } from './background.js';
+export { llm, llmJSON } from './llm.js';
+export { generateWorld, type GenerateWorldOptions, type GenerateWorldResult, type WorldPlan } from './world.js';

@@ -105,14 +105,12 @@ export class Editor {
   // --- World overlay ---
 
   private selectedTileId = 0;
-  private tileNames: Record<number, string> = {
-    0: 'Bamboo Floor',
-    1: 'White Wall',
-    2: 'Wood Slat Wall',
-    3: 'Greenery Wall',
-    4: 'Window',
-    5: 'Door',
-  };
+  private tileNames: Record<number, string> = {};
+
+  /** Load tile names from scene data (set by world generator) */
+  setTileNames(names: Record<number, string>) {
+    this.tileNames = names;
+  }
 
   private renderWorldOverlay(ctx: CanvasRenderingContext2D) {
     const T = this.tileSize;

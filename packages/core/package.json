@@ -1,6 +1,6 @@
 {
   "name": "@miniverse/core",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A tiny pixel world for your AI agents.",
   "type": "module",
   "main": "dist/index.js",

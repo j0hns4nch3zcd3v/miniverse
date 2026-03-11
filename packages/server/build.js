@@ -8,9 +8,6 @@ await build({
   format: 'esm',
   outdir: 'dist',
   external: ['ws'],
-  banner: {
-    js: "import { createRequire as __createRequire } from 'module'; const require = __createRequire(import.meta.url);",
-  },
 });
 
 console.log('Build complete.');

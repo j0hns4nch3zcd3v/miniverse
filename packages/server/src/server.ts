@@ -163,6 +163,12 @@ export class MiniverseServer {
 
     } else if (actionType === 'message' && typeof action.message === 'string') {
       this.routeMessage(agentId, action);
+      // Set sender to speaking state so they walk over and show speech bubble
+      this.store.heartbeat({
+        agent: agentId,
+        state: 'speaking',
+        task: truncate(action.message as string, 40),
+      });
 
     } else if (actionType === 'join_channel' && typeof action.channel === 'string') {
       if (!this.channels.has(action.channel)) {

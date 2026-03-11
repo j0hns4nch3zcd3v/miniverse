@@ -106,6 +106,30 @@ export class Miniverse {
     // Set up signal handler
     this.signal.onUpdate((agents) => this.handleSignalUpdate(agents));
 
+    // Handle DM events — walk sender to adjacent tile near recipient
+    this.signal.onEvent((event) => {
+      if (event.action?.type === 'message' && event.action?.to) {
+        const sender = this.citizens.find(r => r.agentId === event.agentId);
+        const recipient = this.citizens.find(r => r.agentId === event.action.to);
+        if (sender && recipient && sender !== recipient) {
+          const sPos = sender.getTilePosition();
+          const rPos = recipient.getTilePosition();
+          // Try adjacent tiles (left, right, up, down) — pick the shortest reachable path
+          const offsets = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+          let bestPath: { x: number; y: number }[] = [];
+          for (const [dx, dy] of offsets) {
+            const path = this.scene.pathfinder.findPath(sPos.x, sPos.y, rPos.x + dx, rPos.y + dy);
+            if (path.length > 1 && (bestPath.length === 0 || path.length < bestPath.length)) {
+              bestPath = path;
+            }
+          }
+          if (bestPath.length > 1) {
+            sender.walkTo(bestPath);
+          }
+        }
+      }
+    });
+
     // Set up click handler
     this.renderer.canvas.addEventListener('click', (e) => this.handleClick(e));
 
@@ -600,7 +624,10 @@ export class Miniverse {
       } else if (to === 'sleeping') {
         citizen.goToAnchorType('rest', this.typedLocations, this.scene.pathfinder, this.reservation, otherHomes);
       } else if (to === 'speaking') {
-        citizen.goToAnchorType('social', this.typedLocations, this.scene.pathfinder, this.reservation, otherHomes);
+        // If already walking (e.g. toward DM recipient), don't redirect to social anchor
+        if (!citizen.isMoving()) {
+          citizen.goToAnchorType('social', this.typedLocations, this.scene.pathfinder, this.reservation, otherHomes);
+        }
       } else if (to === 'thinking') {
         citizen.goToAnchorType('utility', this.typedLocations, this.scene.pathfinder, this.reservation, otherHomes);
       }

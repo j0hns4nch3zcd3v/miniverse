@@ -87,7 +87,14 @@ export class AgentStore {
     let changed = false;
 
     for (const [id, agent] of this.agents) {
-      if (agent.state !== 'offline' && now - agent.lastSeen > this.offlineTimeout) {
+      const elapsed = now - agent.lastSeen;
+      if (agent.state !== 'offline' && agent.state !== 'sleeping' && elapsed > this.offlineTimeout) {
+        // Graceful: sleep first, then offline
+        agent.state = 'sleeping';
+        agent.task = null;
+        changed = true;
+      } else if (agent.state === 'sleeping' && elapsed > this.offlineTimeout * 2) {
+        // After sleeping for another timeout period, go offline
         agent.state = 'offline';
         agent.task = null;
         changed = true;

@@ -247,15 +247,15 @@ async function main() {
         : 'vite',
       build: 'vite build',
       preview: 'vite preview',
-      ...(signalMode === 'server' ? { server: 'miniverse' } : {}),
+      server: 'miniverse',
     },
     dependencies: {
       '@miniverse/core': coreDep,
-      ...(signalMode === 'server' ? { '@miniverse/server': serverDep } : {}),
+      '@miniverse/server': serverDep,
     },
     devDependencies: {
       '@miniverse/generate': genDep,
-      ...(signalMode === 'server' ? { concurrently: '^9.0.0' } : {}),
+      concurrently: '^9.0.0',
       typescript: '^5.4.0',
       vite: '^5.4.0',
     },

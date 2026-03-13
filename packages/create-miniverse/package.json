@@ -1,6 +1,6 @@
 {
   "name": "create-miniverse",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Create a new Miniverse project — a tiny pixel world for your AI agents.",
   "type": "module",
   "bin": {

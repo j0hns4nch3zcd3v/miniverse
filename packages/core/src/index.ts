@@ -601,13 +601,25 @@ export class Miniverse {
       spawnPosition = spawnLoc.name;
       this.reservation.reserve(spawnLoc.x, spawnLoc.y, agent.id);
     } else {
-      // Find a random walkable tile that isn't reserved
+      // Spread agents across walkable tiles using spawn index for deterministic spacing
       const walkable = this.scene.pathfinder.getWalkableTiles();
-      const candidates = walkable.sort(() => Math.random() - 0.5);
-      const tile = candidates.find(t => this.reservation.isAvailable(t.x, t.y, agent.id))
-        ?? candidates[0];
+      let tile: { x: number; y: number } | undefined;
+      if (walkable.length > 0) {
+        // Evenly distribute across the walkable area
+        const step = Math.max(1, Math.floor(walkable.length / 8));
+        const startIdx = (this.autoSpawnIndex * step) % walkable.length;
+        // Search from the spread-out start point for an unreserved tile
+        for (let i = 0; i < walkable.length; i++) {
+          const idx = (startIdx + i) % walkable.length;
+          const candidate = walkable[idx];
+          if (this.reservation.isAvailable(candidate.x, candidate.y, agent.id)) {
+            tile = candidate;
+            break;
+          }
+        }
+        tile = tile ?? walkable[startIdx];
+      }
       if (tile) {
-        // Create a dynamic position name and reserve it
         spawnPosition = `_spawn_${tile.x}_${tile.y}`;
         this.scene.config.locations[spawnPosition] = { x: tile.x, y: tile.y, label: spawnPosition };
         this.reservation.reserve(tile.x, tile.y, agent.id);

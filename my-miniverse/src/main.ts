@@ -70,7 +70,7 @@ async function main() {
 
   // Auto-discover agents from server and available sprites
   const availableSprites: string[] = await fetch('/api/citizens').then(r => r.json()).catch(() => ['morty', 'dexter', 'nova', 'rio']);
-  const serverAgents: { agent: string; name: string }[] = await fetch('http://localhost:4321/api/agents')
+  const serverAgents: { agent: string; name: string }[] = await fetch('/api/agents')
     .then(r => r.json())
     .then((d: any) => d.agents ?? [])
     .catch(() => []);
@@ -96,7 +96,7 @@ async function main() {
     scene: 'main',
     signal: {
       type: 'websocket',
-      url: 'ws://localhost:4321/ws',
+      url: `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws`,
     },
     citizens,
     scale: 2,
